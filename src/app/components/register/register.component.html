@@ -3,23 +3,23 @@
         <h1 class="text-main fw-bold">Register Now:</h1>
         <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
             <div class="my-3">
-                <label for="name"><span class="text-danger">*</span>Name:</label>
+                <label class="mb-2" for="name"><span class="text-danger">*</span>Name:</label>
                 <input type="text" class="form-control" id="name" formControlName="name">
             </div>
             <div class="my-3">
-                <label for="email"><span class="text-danger">*</span>Email:</label>
+                <label class="mb-2" for="email"><span class="text-danger">*</span>Email:</label>
                 <input type="email" class="form-control" id="email" formControlName="email">
             </div>
             <div class="my-3">
-                <label for="password"><span class="text-danger">*</span>Password:</label>
+                <label class="mb-2" for="password"><span class="text-danger">*</span>Password:</label>
                 <input type="password" class="form-control" id="password" formControlName="password">
             </div>
             <div class="my-3">
-                <label for="rePassword"><span class="text-danger">*</span>Confirm Password:</label>
+                <label class="mb-2" for="rePassword"><span class="text-danger">*</span>Confirm Password:</label>
                 <input type="password" class="form-control" id="rePassword" formControlName="rePassword">
             </div>
             <div class="my-3">
-                <label for="phon"><span class="text-danger">*</span>Phone:</label>
+                <label class="mb-2" for="phone"><span class="text-danger">*</span>Phone:</label>
                 <input type="tel" class="form-control" id="phone" formControlName="phone">
             </div>
             <button type="submit" class="btn-main w-50 d-block mx-auto">Register</button>
