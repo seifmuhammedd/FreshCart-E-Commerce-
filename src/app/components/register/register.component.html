@@ -5,24 +5,55 @@
             <div class="my-3">
                 <label class="mb-2" for="name"><span class="text-danger">*</span>Name:</label>
                 <input type="text" class="form-control" id="name" formControlName="name">
+                @if (registerForm.get("name")?.errors && registerForm.get("name")?.touched) {
+                    <div class="alert alert-warning p-2 fs-6 fw-bold rounded-2 mt-2">
+                        @if (registerForm.get("name")?.getError("required")) {<p class="m-0">Name Is Required</p>}
+                        @else if (registerForm.get("name")?.getError("minlength")) {<p class="m-0">Name Length must be at least 3</p>}
+                        @else if (registerForm.get("name")?.getError("maxlength")) {<p class="m-0">Name Length must be maximum 10</p>}
+                    </div>
+                }
+                
             </div>
             <div class="my-3">
                 <label class="mb-2" for="email"><span class="text-danger">*</span>Email:</label>
                 <input type="email" class="form-control" id="email" formControlName="email">
+                @if (registerForm.get("email")?.errors && registerForm.get("email")?.touched) {
+                    <div class="alert alert-warning p-2 fs-6 fw-bold rounded-2 mt-2">
+                        @if (registerForm.get("email")?.getError("required")) {<p class="m-0">Email Is Required</p>}
+                        @else if (registerForm.get("email")?.getError("email")) {<p class="m-0">Email format is not correct</p>}
+                    </div>
+                }
             </div>
             <div class="my-3">
                 <label class="mb-2" for="password"><span class="text-danger">*</span>Password:</label>
                 <input type="password" class="form-control" id="password" formControlName="password">
+                @if (registerForm.get("password")?.errors && registerForm.get("password")?.touched) {
+                    <div class="alert alert-warning p-2 fs-6 fw-bold rounded-2 mt-2">
+                        @if (registerForm.get("password")?.getError("required")) {<p class="m-0">Password is required</p>}
+                        @else if (registerForm.get("password")?.getError("pattern")) {<p class="m-0">Password must be at least 6 charachters</p>}
+                    </div>
+                }
             </div>
             <div class="my-3">
                 <label class="mb-2" for="rePassword"><span class="text-danger">*</span>Confirm Password:</label>
                 <input type="password" class="form-control" id="rePassword" formControlName="rePassword">
+                @if (registerForm.getError("missMatch") && registerForm.get("rePassword")?.touched) {
+                    <div class="alert alert-warning p-2 fs-6 fw-bold rounded-2 mt-2">
+                        <p class="m-0">Passwords doesn't match</p>
+                    </div>  
+                }
             </div>
             <div class="my-3">
                 <label class="mb-2" for="phone"><span class="text-danger">*</span>Phone:</label>
                 <input type="tel" class="form-control" id="phone" formControlName="phone">
+                @if (registerForm.get("phone")?.errors && registerForm.get("phone")?.touched) {
+                    <div class="alert alert-warning p-2 fs-6 fw-bold rounded-2 mt-2">
+                        @if (registerForm.get("phone")?.getError("required")) {<p class="m-0">Phone is required</p>}
+                        @else if (registerForm.get("phone")?.getError("pattern")) {<p class="m-0">Egyptian numbers only are allowed</p>}
+                    </div>
+                }
             </div>
-            <button type="submit" class="btn-main w-50 d-block mx-auto">Register</button>
+            <button [disabled]="registerForm.invalid" type="submit" class="btn-main w-50 d-block mx-auto">Register</button>
         </form>
     </div>
 </section>

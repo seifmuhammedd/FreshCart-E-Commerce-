@@ -21,7 +21,7 @@ export class RegisterComponent {
     if (g.get("password")?.value === g.get("rePassword")?.value){
       return null
     }else{
-      return {'missmatch':true}
+      return {'missMatch':true}
     }
   }
 
