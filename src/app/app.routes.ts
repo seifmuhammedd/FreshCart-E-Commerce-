@@ -9,6 +9,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { BrandsComponent } from './components/brands/brands.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
     {path : "" , redirectTo : "auth" , pathMatch : "full"},
@@ -24,6 +25,6 @@ export const routes: Routes = [
         {path : "brands" , component : BrandsComponent , title : "brands"},
         {path : "products" , component : ProductsComponent , title : "Products"},
         {path : "categories" , component : CategoriesComponent , title : "Categoreies"}
-    ]},
+    ] , canActivate : [authGuard]},
     {path : "**" , component : NotFoundComponent}
 ];

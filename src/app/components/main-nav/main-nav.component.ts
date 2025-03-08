@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-main-nav',
@@ -9,5 +9,10 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './main-nav.component.css'
 })
 export class MainNavComponent {
+  constructor ( private _Router : Router ) {}
 
+  logOut() : void {
+    sessionStorage.removeItem("token")
+    this._Router.navigate(["/auth/login"])
+  }
 }
