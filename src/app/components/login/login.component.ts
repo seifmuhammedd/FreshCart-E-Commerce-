@@ -16,7 +16,7 @@ export class LoginComponent {
   
   loading : boolean = false
   responseText !: string
-
+  
   logInForm : FormGroup = this._FormBuilder.group({
     email : [null , [Validators.required , Validators.email]],
     password : [null , [Validators.required , Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)]]
@@ -27,16 +27,17 @@ export class LoginComponent {
         this.loading=true
         this._AuthService.logInUser(this.logInForm.value).subscribe({
           next : ( res ) => {
-            this.responseText = res.message
             this.loading = false
-            setInterval( () => {
+            this.responseText = res.message
+            setTimeout( () => {
+              this.loading = false
               this._Router.navigate([ "/main/home" ])
             } , 2000)
             sessionStorage.setItem( "token" , res.token )
           },
           error : ( error ) => {
-            this.responseText = error.error.message
             this.loading = false
+            this.responseText = error.error.message
           }
         })
       }else{
