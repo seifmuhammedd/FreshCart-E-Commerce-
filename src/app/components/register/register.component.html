@@ -1,7 +1,10 @@
 <section>
     <div class="container bg-main-light my-5 shadow p-5 rounded-2">
         <h1 class="text-main fw-bold">Register Now:</h1>
-        @if(responseText){<p class="alert alert-danger p-2 text-center rounded-2 w-50 mx-auto">{{responseText}}</p>}
+        @if(responseText){<p class="alert alert-danger p-2 text-center rounded-2 w-50 mx-auto" [ngClass]="{
+            'alert-danger' :   responseText != 'success',
+            'alert-success' : responseText == 'success'
+        }">{{responseText}}</p>}
         <form [formGroup]="registerForm" (ngSubmit)="registerData()">
             <div class="my-3">
                 <label class="mb-2" for="name"><span class="text-danger">*</span>Name:</label>
