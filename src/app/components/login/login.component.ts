@@ -1,8 +1,9 @@
 import { NgClass } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,13 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
   constructor( private _FormBuilder:FormBuilder , private _AuthService : AuthService , private _Router : Router ){}
   
   loading : boolean = false
   responseText !: string
-  
+  loginSub !: Subscription
+
   logInForm : FormGroup = this._FormBuilder.group({
     email : [null , [Validators.required , Validators.email]],
     password : [null , [Validators.required , Validators.pattern(/^\w{6,}$/)]]
@@ -25,7 +27,7 @@ export class LoginComponent {
     logInData():void{
       if(this.logInForm.valid){
         this.loading=true
-        this._AuthService.logInUser(this.logInForm.value).subscribe({
+        this.loginSub = this._AuthService.logInUser(this.logInForm.value).subscribe({
           next : ( res ) => {
             this.loading = false
             this.responseText = res.message
@@ -42,5 +44,9 @@ export class LoginComponent {
       }else{
         this.logInForm.markAllAsTouched()
       }
+    }
+
+    ngOnDestroy(): void {
+      this.loginSub?.unsubscribe()
     }
 }
