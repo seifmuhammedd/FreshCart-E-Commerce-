@@ -10,6 +10,7 @@ import { BrandsComponent } from './components/brands/brands.component';
 import { ProductsComponent } from './components/products/products.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { authGuard } from './core/guards/auth.guard';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 export const routes: Routes = [
     {path : "" , redirectTo : "auth" , pathMatch : "full"},
@@ -24,7 +25,8 @@ export const routes: Routes = [
         {path : "cart" , component : CartComponent , title : "Cart"},
         {path : "brands" , component : BrandsComponent , title : "brands"},
         {path : "products" , component : ProductsComponent , title : "Products"},
-        {path : "categories" , component : CategoriesComponent , title : "Categoreies"}
+        {path : "categories" , component : CategoriesComponent , title : "Categoreies"},
+        {path : "productDetails/:p_ID" , component : ProductDetailsComponent , title : "Product Details"},
     ] , canActivate : [authGuard]},
     {path : "**" , component : NotFoundComponent}
 ];
