@@ -37,8 +37,12 @@
         <h1>Top Products:</h1>
     </div>
     <div class="container">
+        <div class="d-flex justify-content-center align-items-center w-50 mx-auto my-4">
+            <i class="fa-solid fa-magnifying-glass fa-fade fs-2 text-main"></i>
+            <input type="search" class="form-control mx-2 border-success p-2" placeholder="Search Here..." [(ngModel)]="searchValue">
+        </div>
         <div class="row g-3">
-            @for (product of productsData; track product._id) {
+            @for (product of productsData | search : searchValue ; track product._id) {
             <div class="col-md-2 col-sm-6">
                 <div class="product p-2 rounded-2 cursor-pointer" >
                     <div [routerLink]="['/main/productDetails' , product.id]">

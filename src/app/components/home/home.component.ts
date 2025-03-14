@@ -6,11 +6,13 @@ import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
+import { SearchPipe } from '../../core/pipes/search.pipe';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CarouselModule , RouterLink],
+  imports: [CarouselModule , RouterLink , SearchPipe , FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
@@ -24,6 +26,7 @@ export class HomeComponent implements OnInit , OnDestroy {
   categoriesData !: ICategory[]
   productsSub !: Subscription
   categoriesSub !: Subscription
+  searchValue : string = ""
 
   categoriesSlider: OwlOptions = {
     loop: true,
