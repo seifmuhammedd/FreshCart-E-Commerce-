@@ -2,11 +2,13 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../core/services/products.service';
 import { Iproduct } from '../../core/interfaces/iproduct';
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [],
+  imports: [CarouselModule , CurrencyPipe],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -18,6 +20,33 @@ export class ProductDetailsComponent implements OnInit {
   productId !: string | null
   productDetails : Iproduct = {} as Iproduct
 
+  customOptions: OwlOptions = {
+    loop: true,
+    autoplay: true,
+    autoplayTimeout: 2000,
+    mouseDrag: true,
+    touchDrag: true,
+    pullDrag: false,
+    dots: true,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: false
+  }
+
   ngOnInit(): void {
     this._ActivatedRoute.paramMap.subscribe({
 
@@ -27,7 +56,6 @@ export class ProductDetailsComponent implements OnInit {
 
             next : (res) => {
               this.productDetails = res.data
-              console.log(this.productDetails)
             },
             error : (error) => console.log(error)
 
