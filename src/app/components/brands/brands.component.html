@@ -1,1 +1,15 @@
-<p>brands works!</p>
+<section class="my-3">
+    <div class="container">
+        <div class="row g-2">
+            @for (brand of brandsData; track brand._id) {
+                <div class="col-md-3 col-sm-2">
+                <div class="brand cursor-pointer">
+                        <div class="brand-img">
+                            <img [src]="brand.image" [alt]="brand.slug" class="w-100">
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
