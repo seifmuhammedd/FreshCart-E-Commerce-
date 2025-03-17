@@ -35,6 +35,7 @@ export class LoginComponent implements OnDestroy {
               this._Router.navigate([ "/main/home" ])
             } , 2000)
             sessionStorage.setItem( "token" , res.token )
+            this._AuthService.getDecodedInfo()
           },
           error : ( error ) => {
             this.loading = false
