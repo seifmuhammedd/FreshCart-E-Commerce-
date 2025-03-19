@@ -24,7 +24,7 @@ export class RegisterComponent implements OnDestroy {
     email :[null , [Validators.required , Validators.email]],
     password :[null , [Validators.required , Validators.pattern(/^\w{6,}$/)]],
     rePassword :[null],
-    phone :[null , [Validators.required , Validators.pattern(/^01[0125][0-9]{8}$/)]]
+    phone :[null , [Validators.required , Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)]]
   } , {validators : this.comparePassword})  
 
   comparePassword (g : AbstractControl):(null|object){

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { SearchPipe } from '../../core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -16,10 +17,17 @@ import { FormsModule } from '@angular/forms';
 export class ProductsComponent implements OnInit , OnDestroy {
 
   private readonly _ProductsService = inject(ProductsService)
+  private readonly _cartService = inject(CartService)
 
   productsData !: Iproduct[]
   productsSub !: Subscription
   searchValue : string = ""
+
+  addCartItem(productId:string){
+    this._cartService.addItemToCart(productId).subscribe({
+      error : (error) => {console.log(error)}
+    })
+  }
 
   ngOnInit(): void {
     this.productsSub = this._ProductsService.getAllProducts().subscribe({

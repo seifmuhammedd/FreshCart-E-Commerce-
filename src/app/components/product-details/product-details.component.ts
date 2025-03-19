@@ -4,6 +4,7 @@ import { ProductsService } from '../../core/services/products.service';
 import { Iproduct } from '../../core/interfaces/iproduct';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CurrencyPipe } from '@angular/common';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-product-details',
@@ -14,7 +15,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  constructor (private _ProductsService : ProductsService) {}
+  constructor (private _ProductsService : ProductsService , private _cartService : CartService) {}
 
   private readonly _ActivatedRoute = inject(ActivatedRoute)
   productId !: string | null
@@ -45,6 +46,12 @@ export class ProductDetailsComponent implements OnInit {
       }
     },
     nav: false
+  }
+
+  addCartItem(productId:string){
+    this._cartService.addItemToCart(productId).subscribe({
+      error : (error) => {console.log(error)}
+    })
   }
 
   ngOnInit(): void {

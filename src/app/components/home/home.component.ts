@@ -1,13 +1,14 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../../core/services/products.service';
 import { Iproduct } from '../../core/interfaces/iproduct';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CategoriesService } from '../../core/services/categories.service';
 import { ICategory } from '../../core/interfaces/icategory';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
 import { SearchPipe } from '../../core/pipes/search.pipe';
 import { FormsModule, NgModel } from '@angular/forms';
+import { CartService } from '../../core/services/cart.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit , OnDestroy {
 
   private readonly _ProductsService = inject(ProductsService)
   private readonly _CategoriesService = inject(CategoriesService)
+  private readonly _CartService = inject(CartService)
 
 
   productsData !: Iproduct[]
@@ -71,6 +73,11 @@ export class HomeComponent implements OnInit , OnDestroy {
     nav: false
   }
 
+  addCartItem(productId:string){
+    this._CartService.addItemToCart(productId).subscribe({
+      error : (error) => {console.log(error)}
+    })
+  }
 
   ngOnInit(): void {
     this.productsSub = this._ProductsService.getAllProducts().subscribe({

@@ -1,1 +1,39 @@
-<p>cart works!</p>
+@if (cartData) {
+<section class="bg-main-light p-3 w-75 mx-auto rounded-2 shadow my-3">
+    <div class="cart-head d-flex align-items-center justify-content-between">
+        <div>
+            <h1 class="fs-1 fw-bold">Shop Cart:</h1>
+            <h3 class="text-main fw-bold">Total cart price: {{cartData.totalCartPrice | currency : "GBP" }}</h3>
+        </div>
+        <div class="clear-cart cursor-pointer text-danger" (click)="clearAllCart()">
+            <h3 class="fs-5">Empty Cart <i class="fa-solid fa-trash-can"></i></h3>
+        </div>
+    </div>
+    <div class="container my-2">
+        @for (item of cartData.products; track item.product._id) {
+        <div class="row border-bottom border-3 align-items-center">
+            <div class="col-md-2 p-2">
+                <div class="item-img">
+                    <img [src]="item.product.imageCover" [alt]="item.product.title" class="w-100 rounded-3">
+                </div>
+            </div>
+            <div class="col-md-8 p-2">
+                <div class="item-details">
+                    <h2 class="fs-2 fw-bold">{{item.product.title}}</h2>
+                    <p class="text-main fw-bold fs-3">Price: {{item.price | currency : "GBP"}}</p>
+                    <span class="cursor-pointer" (click)="removeCartItem(item.product._id)"><i
+                            class="fa-solid fa-trash text-main"></i> Remove</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="item-quantitiy d-flex justify-content-between align-items-center fs-2">
+                    <span><i class="fa-solid fa-circle-plus text-main cursor-pointer"></i></span>
+                    <span>{{item.count}}</span>
+                    <span><i class="fa-solid fa-circle-minus text-main cursor-pointer"></i></span>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</section>
+}
