@@ -26,4 +26,8 @@ export class CartService {
     return this._HttpClient.delete(`${environment.baseURL}/api/v1/cart` , {headers : this.clientToken} )
   }
 
+  updateItemQuantitiy(productId : string , count : number) : Observable<any>{
+    return this._HttpClient.put(`${environment.baseURL}/api/v1/cart/${productId}` , {"count" : count} , {headers : this.clientToken})
+  }
+
 }

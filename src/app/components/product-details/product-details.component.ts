@@ -5,6 +5,7 @@ import { Iproduct } from '../../core/interfaces/iproduct';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { CurrencyPipe } from '@angular/common';
 import { CartService } from '../../core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-details',
@@ -15,7 +16,7 @@ import { CartService } from '../../core/services/cart.service';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  constructor (private _ProductsService : ProductsService , private _cartService : CartService) {}
+  constructor (private _ProductsService : ProductsService , private _cartService : CartService , private _ToastrService : ToastrService) {}
 
   private readonly _ActivatedRoute = inject(ActivatedRoute)
   productId !: string | null
@@ -50,7 +51,13 @@ export class ProductDetailsComponent implements OnInit {
 
   addCartItem(productId:string){
     this._cartService.addItemToCart(productId).subscribe({
-      error : (error) => {console.log(error)}
+      next : (res) => {
+        this._ToastrService.success(res.message , "FreshCart" , {timeOut : 2000 , closeButton : true})
+      },
+      error : (error) => {
+        console.log(error)
+        this._ToastrService.error(error.message , "FreshCart" , {timeOut : 2000 , closeButton : true})
+      }
     })
   }
 

@@ -32,6 +32,15 @@ export class CartComponent implements OnInit , OnDestroy {
     })
   }
 
+  updateItemQuantity(productId : string , count : number){
+    if(count > 0){
+      this._CartService.updateItemQuantitiy(productId,count).subscribe({
+        next : (res) => {this.cartData = res.data},
+        error : (error) => {console.log(error)}
+      })
+    }
+  }
+
   ngOnInit(): void {
     this.cartSub = this._CartService.getLoggedUserCart().subscribe({
       next : (res) => {

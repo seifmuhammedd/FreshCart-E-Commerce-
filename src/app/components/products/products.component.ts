@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { SearchPipe } from '../../core/pipes/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../core/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products',
@@ -18,6 +19,7 @@ export class ProductsComponent implements OnInit , OnDestroy {
 
   private readonly _ProductsService = inject(ProductsService)
   private readonly _cartService = inject(CartService)
+  private readonly _ToastrService = inject(ToastrService)
 
   productsData !: Iproduct[]
   productsSub !: Subscription
@@ -25,7 +27,13 @@ export class ProductsComponent implements OnInit , OnDestroy {
 
   addCartItem(productId:string){
     this._cartService.addItemToCart(productId).subscribe({
-      error : (error) => {console.log(error)}
+      next : (res) => {
+        this._ToastrService.success(res.message , "FreshCart" , {timeOut : 2000 , closeButton : true})
+      },
+      error : (error) => {
+        console.log(error)
+        this._ToastrService.error(error.message , "FreshCart" , {timeOut : 2000 , closeButton : true})
+      }
     })
   }
 

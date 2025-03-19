@@ -26,14 +26,21 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class="item-quantitiy d-flex justify-content-between align-items-center fs-2">
-                    <span><i class="fa-solid fa-circle-plus text-main cursor-pointer"></i></span>
-                    <span>{{item.count}}</span>
-                    <span><i class="fa-solid fa-circle-minus text-main cursor-pointer"></i></span>
+                <div class="item-quantitiy d-flex justify-content-center align-items-center fs-2">
+                    <span (click)="updateItemQuantity(item.product._id , item.count+1)"><i
+                            class="fa-solid fa-circle-plus text-main cursor-pointer"></i></span>
+                    <span class="mx-3">{{item.count}}</span>
+                    @if (item.count > 1) {
+                    <span (click)="updateItemQuantity(item.product._id , item.count-1)"><i
+                            class="fa-solid fa-circle-minus text-main cursor-pointer"></i></span>
+                    }
                 </div>
             </div>
         </div>
         }
     </div>
+    @if(cartData.products.length){
+    <button class="btn-main mx-auto w-50 d-block my-3 ">Check Out</button>  
+    }
 </section>
 }
