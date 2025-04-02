@@ -78,6 +78,7 @@ export class HomeComponent implements OnInit , OnDestroy {
   addCartItem(productId:string){
     this._CartService.addItemToCart(productId).subscribe({
       next : (res) => {
+        this._CartService.cartCounter.next(res.numOfCartItems) 
         this._ToastrService.success(res.message , "FreshCart" , {timeOut : 2000 , closeButton : true})
       },
       error : (error) => {

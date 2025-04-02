@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environments/environments';
 
 @Injectable({
@@ -9,7 +9,10 @@ import { environment } from '../environments/environments';
 export class CartService {
 
   constructor( private _HttpClient : HttpClient ) { }
-  clientToken : any = { token : sessionStorage.getItem("token") } 
+
+  clientToken : any = { token : sessionStorage.getItem("token") }
+  cartCounter : BehaviorSubject<number> = new BehaviorSubject(0) 
+  
   getLoggedUserCart() : Observable<any> {
     return this._HttpClient.get(`${environment.baseURL}/api/v1/cart` , {headers : this.clientToken} )
   }
