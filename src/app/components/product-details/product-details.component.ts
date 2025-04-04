@@ -16,9 +16,10 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  constructor (private _ProductsService : ProductsService , private _cartService : CartService , private _ToastrService : ToastrService) {}
+  constructor (private _ProductsService : ProductsService , private _CartService : CartService , private _ToastrService : ToastrService) {}
 
   private readonly _ActivatedRoute = inject(ActivatedRoute)
+  
   productId !: string | null
   productDetails : Iproduct = {} as Iproduct
 
@@ -50,8 +51,9 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   addCartItem(productId:string){
-    this._cartService.addItemToCart(productId).subscribe({
+    this._CartService.addItemToCart(productId).subscribe({
       next : (res) => {
+        this._CartService.cartCounter.next(res.numOfCartItems) 
         this._ToastrService.success(res.message , "FreshCart" , {timeOut : 2000 , closeButton : true})
       },
       error : (error) => {

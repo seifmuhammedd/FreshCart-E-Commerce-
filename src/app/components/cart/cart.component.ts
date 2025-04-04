@@ -20,14 +20,20 @@ export class CartComponent implements OnInit , OnDestroy {
 
   removeCartItem(productId : string) {
     this._CartService.removeItemFromCart(productId).subscribe({
-      next : (res) => {this.cartData = res.data},
+      next : (res) => {
+        this.cartData = res.data
+        this._CartService.cartCounter.next(res.numOfCartItems)
+      },
       error : (error) => {console.log(error)}
     })
   }
 
   clearAllCart() {
     this._CartService.clearCart().subscribe({
-      next : (res) => {this.cartData = res.data},
+      next : (res) => {
+        this.cartData = res.data
+        this._CartService.cartCounter.next(res.numOfCartItems)
+      },
       error : (error) => {console.log(error)}
     })
   }

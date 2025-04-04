@@ -14,10 +14,18 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
   constructor ( private _Router : Router ) {}
   private readonly _CartService = inject(CartService)
+
   cartCounter : number = 0
   subscriptionID !: Subscription
 
   ngOnInit(): void {
+
+    this._CartService.getLoggedUserCart().subscribe({
+      next : (res) => {
+        this.cartCounter = res.numOfCartItems
+      }
+    })
+
     this.subscriptionID =  this._CartService.cartCounter.subscribe({
       next : (value) => {
         this.cartCounter = value

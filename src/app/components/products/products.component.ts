@@ -18,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductsComponent implements OnInit , OnDestroy {
 
   private readonly _ProductsService = inject(ProductsService)
-  private readonly _cartService = inject(CartService)
+  private readonly _CartService = inject(CartService)
   private readonly _ToastrService = inject(ToastrService)
 
   productsData !: Iproduct[]
@@ -26,8 +26,9 @@ export class ProductsComponent implements OnInit , OnDestroy {
   searchValue : string = ""
 
   addCartItem(productId:string){
-    this._cartService.addItemToCart(productId).subscribe({
+    this._CartService.addItemToCart(productId).subscribe({
       next : (res) => {
+        this._CartService.cartCounter.next(res.numOfCartItems) 
         this._ToastrService.success(res.message , "FreshCart" , {timeOut : 2000 , closeButton : true})
       },
       error : (error) => {
