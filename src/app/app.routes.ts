@@ -11,6 +11,7 @@ import { ProductsComponent } from './components/products/products.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { authGuard } from './core/guards/auth.guard';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 export const routes: Routes = [
     {path : "" , redirectTo : "auth" , pathMatch : "full"},
@@ -27,6 +28,7 @@ export const routes: Routes = [
         {path : "products" , component : ProductsComponent , title : "Products"},
         {path : "categories" , component : CategoriesComponent , title : "Categoreies"},
         {path : "productDetails/:p_ID" , component : ProductDetailsComponent , title : "Product Details"},
+        {path : "checkout/:cart_ID" , component : CheckoutComponent , title : "Check Out"},
     ] , canActivate : [authGuard]},
     {path : "**" , component : NotFoundComponent}
 ];
