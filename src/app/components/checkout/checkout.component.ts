@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { PaymentService } from '../../core/services/payment.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,6 +14,8 @@ export class CheckoutComponent implements OnInit {
 
   private readonly _FormBuilder = inject(FormBuilder)
   private readonly _ActivatedRoute = inject(ActivatedRoute)
+  private readonly _PaymentService = inject(PaymentService)
+
   cartID !: string | null
 
   ngOnInit(): void {
@@ -31,7 +34,11 @@ export class CheckoutComponent implements OnInit {
 
   payOrder() : void {
     if (this.shippingAddressForm.valid) {
-      console.log(this.shippingAddressForm.value);
+      this._PaymentService.createCheckOutSession(this.cartID, this.shippingAddressForm.value).subscribe({
+        next : (res) => {
+          window.open(res.session.url, "_self")
+        }
+      })
     } else {
       this.shippingAddressForm.markAllAsTouched()
     }
