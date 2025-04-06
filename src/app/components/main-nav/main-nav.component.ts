@@ -35,7 +35,7 @@ export class MainNavComponent implements OnInit, OnDestroy {
 
   logOut() : void {
     sessionStorage.removeItem("token")
-    this._Router.navigate(["/auth/login"])
+    this._Router.navigate(["/login"])
   }
 
   ngOnDestroy(): void {

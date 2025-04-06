@@ -1,0 +1,36 @@
+<section class="bg-main-light p-3 w-75 mx-auto rounded-2 shadow my-3">
+    @if (userOrders) {
+    <div class="cart-head d-flex align-items-center justify-content-between">
+        <div>
+            <h1 class="fs-1 fw-bold text-main">All Orders:</h1>
+        </div>
+    </div>
+    <div class="container my-2">
+        <table class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th scope="col" class="table-active">#</th>
+                <th scope="col">Price</th>
+                <th scope="col">City</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+                @for (order of userOrders; track order._id) {
+                    <tr>
+                        <th scope="row" class="table-active">{{order.id}}</th>
+                        <td>{{order.totalOrderPrice}}</td>
+                        <td>{{order.shippingAddress.city}}</td>
+                        <td>{{order.shippingAddress.phone}}</td>
+                        <td>{{order.shippingAddress.details}}</td>
+                      </tr>
+                }
+            </tbody>
+          </table>
+    </div>
+}
+</section>
+
+
+

@@ -12,21 +12,22 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { authGuard } from './core/guards/auth.guard';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AllordersComponent } from './components/allorders/allorders.component';
 
 export const routes: Routes = [
-    {path : "" , redirectTo : "auth" , pathMatch : "full"},
-    {path : "auth" , component : AuthComponent , children : [
+    {path : "" , component : AuthComponent , children : [
         {path : "" , redirectTo : "login" , pathMatch : "full"},
         {path : "login" , component :  LoginComponent , title : "LogIn"},
         {path : "register" , component : RegisterComponent , title : "Register"}
     ]},
-    {path : "main" , component : MainComponent , children : [
+    {path : "" , component : MainComponent , children : [
         {path : "" , redirectTo : "home" , pathMatch : "full"},
         {path : "home" , component : HomeComponent , title : "Home"},
         {path : "cart" , component : CartComponent , title : "Cart"},
         {path : "brands" , component : BrandsComponent , title : "brands"},
         {path : "products" , component : ProductsComponent , title : "Products"},
         {path : "categories" , component : CategoriesComponent , title : "Categoreies"},
+        {path : "allorders" , component : AllordersComponent , title : "Orders"},
         {path : "productDetails/:p_ID" , component : ProductDetailsComponent , title : "Product Details"},
         {path : "checkout/:cart_ID" , component : CheckoutComponent , title : "Check Out"},
     ] , canActivate : [authGuard]},
