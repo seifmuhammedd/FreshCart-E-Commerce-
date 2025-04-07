@@ -9,7 +9,7 @@
             @for (product of productsData | search : searchValue; track product._id) {
             <div class="col-md-3 col-sm-2">
                 <div class="product p-2 rounded-2 cursor-pointer">
-                    <div [routerLink]="['/main/productDetails' , product._id]">
+                    <div [routerLink]="['/productDetails' , product._id]">
                         <div class="product-img">
                             <img [src]="product.imageCover" [alt]="product.title" class="w-100 rounded">
                         </div>
