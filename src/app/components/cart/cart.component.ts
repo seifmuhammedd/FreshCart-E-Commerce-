@@ -2,7 +2,6 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
 import { Subscription } from 'rxjs';
 import { ICart } from '../../core/interfaces/icart';
-import { error } from 'console';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -24,8 +23,7 @@ export class CartComponent implements OnInit , OnDestroy {
       next : (res) => {
         this.cartData = res.data
         this._CartService.cartCounter.next(res.numOfCartItems)
-      },
-      error : (error) => {console.log(error)}
+      }
     })
   }
 
@@ -34,16 +32,14 @@ export class CartComponent implements OnInit , OnDestroy {
       next : (res) => {
         this.cartData = res.data
         this._CartService.cartCounter.next(res.numOfCartItems)
-      },
-      error : (error) => {console.log(error)}
+      }
     })
   }
 
   updateItemQuantity(productId : string , count : number){
     if(count > 0){
       this._CartService.updateItemQuantitiy(productId,count).subscribe({
-        next : (res) => {this.cartData = res.data},
-        error : (error) => {console.log(error)}
+        next : (res) => {this.cartData = res.data}
       })
     }
   }
@@ -52,9 +48,6 @@ export class CartComponent implements OnInit , OnDestroy {
     this.cartSub = this._CartService.getLoggedUserCart().subscribe({
       next : (res) => {
         this.cartData = res.data
-      },
-      error : (error) => {
-        console.log(error)
       }
     })
   }

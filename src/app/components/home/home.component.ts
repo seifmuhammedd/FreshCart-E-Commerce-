@@ -92,15 +92,13 @@ export class HomeComponent implements OnInit , OnDestroy {
     this.productsSub = this._ProductsService.getAllProducts().subscribe({
       next : (res) => {
         this.productsData = res.data.slice(0,20)
-      },
-      error : (error) => {console.log(error)}
+      }
     })
 
     this.categoriesSub = this._CategoriesService.getALLCategories().subscribe({
       next : (res) => {
         this.categoriesData = res.data
-      },
-      error : (error) => {console.log(error)}
+      }
     })
   }
 
