@@ -8,11 +8,12 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { reqHeaderInterceptor } from './core/interceptors/req-header.interceptor';
 import { resErrorInterceptor } from './core/interceptors/res-error.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withViewTransitions()),
-    importProvidersFrom(BrowserAnimationsModule),
+    importProvidersFrom(BrowserAnimationsModule, NgxSpinnerModule),
     provideClientHydration(),
     provideHttpClient(withFetch(), withInterceptors([reqHeaderInterceptor, resErrorInterceptor])),
     provideToastr(),

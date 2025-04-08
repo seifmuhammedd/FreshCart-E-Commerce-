@@ -10,6 +10,7 @@ import { SearchPipe } from '../../core/pipes/search.pipe';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CartService } from '../../core/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomeComponent implements OnInit , OnDestroy {
   private readonly _CategoriesService = inject(CategoriesService)
   private readonly _CartService = inject(CartService)
   private readonly _ToastrService = inject(ToastrService)
+  private readonly _NgxSpinnerService = inject(NgxSpinnerService)
 
 
   productsData !: Iproduct[]
@@ -89,8 +91,10 @@ export class HomeComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit(): void {
+    this._NgxSpinnerService.show()
     this.productsSub = this._ProductsService.getAllProducts().subscribe({
       next : (res) => {
+        this._NgxSpinnerService.hide()
         this.productsData = res.data.slice(0,20)
       }
     })
