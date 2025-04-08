@@ -9,13 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { reqHeaderInterceptor } from './core/interceptors/req-header.interceptor';
 import { resErrorInterceptor } from './core/interceptors/res-error.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes, withViewTransitions()),
     importProvidersFrom(BrowserAnimationsModule, NgxSpinnerModule),
     provideClientHydration(),
-    provideHttpClient(withFetch(), withInterceptors([reqHeaderInterceptor, resErrorInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([reqHeaderInterceptor, resErrorInterceptor, loadingInterceptor])),
     provideToastr(),
   ],
 };

@@ -91,10 +91,8 @@ export class HomeComponent implements OnInit , OnDestroy {
   }
 
   ngOnInit(): void {
-    this._NgxSpinnerService.show()
     this.productsSub = this._ProductsService.getAllProducts().subscribe({
       next : (res) => {
-        this._NgxSpinnerService.hide()
         this.productsData = res.data.slice(0,20)
       }
     })

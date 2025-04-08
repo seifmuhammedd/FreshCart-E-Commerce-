@@ -15,7 +15,6 @@ import { Subscription } from 'rxjs';
 export class LoginComponent implements OnDestroy {
   constructor( private _FormBuilder:FormBuilder , private _AuthService : AuthService , private _Router : Router ){}
   
-  loading : boolean = false
   responseText !: string
   loginSub !: Subscription
 
@@ -26,20 +25,14 @@ export class LoginComponent implements OnDestroy {
   
     logInData():void{
       if(this.logInForm.valid){
-        this.loading=true
         this.loginSub = this._AuthService.logInUser(this.logInForm.value).subscribe({
           next : ( res ) => {
-            this.loading = false
             this.responseText = res.message
             setTimeout( () => {
               this._Router.navigate([ "/home" ])
             } , 2000)
             sessionStorage.setItem( "token" , res.token )
             this._AuthService.getDecodedInfo()
-          },
-          error : ( error ) => {
-            this.loading = false
-            this.responseText = error.error.message
           }
         })
       }else{
