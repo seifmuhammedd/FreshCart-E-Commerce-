@@ -6,12 +6,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { CartComponent } from './components/cart/cart.component';
-import { BrandsComponent } from './components/brands/brands.component';
 import { ProductsComponent } from './components/products/products.component';
 import { authGuard } from './core/guards/auth.guard';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { AllordersComponent } from './components/allorders/allorders.component';
 
 export const routes: Routes = [
     {path : "" , component : AuthComponent , children : [
@@ -23,10 +21,10 @@ export const routes: Routes = [
         {path : "" , redirectTo : "home" , pathMatch : "full"},
         {path : "home" , component : HomeComponent , title : "Home"},
         {path : "cart" , component : CartComponent , title : "Cart"},
-        {path : "brands" , component : BrandsComponent , title : "brands"},
+        {path : "brands" , loadComponent: () => import("./components/brands/brands.component").then( (componentClasses) => componentClasses.BrandsComponent ) , title : "brands"},
         {path : "products" , component : ProductsComponent , title : "Products"},
         {path : "categories" , loadComponent: () => import("./components/categories/categories.component").then( (componentClasses) => componentClasses.CategoriesComponent ) , title : "Categoreies"},
-        {path : "allorders" , component : AllordersComponent , title : "Orders"},
+        {path : "allorders" , loadComponent: () => import("./components/allorders/allorders.component").then( (componentClasses) => componentClasses.AllordersComponent ) , title : "Orders"},
         {path : "productDetails/:p_ID" , component : ProductDetailsComponent , title : "Product Details"},
         {path : "checkout/:cart_ID" , component : CheckoutComponent , title : "Check Out"},
     ] , canActivate : [authGuard]},
