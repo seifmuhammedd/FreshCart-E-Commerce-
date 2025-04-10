@@ -42,7 +42,7 @@ export class RegisterComponent implements OnDestroy {
         next : ( res ) => {
           this.responseText = res.message
           this.loading = false
-          setInterval( () => {
+          setTimeout( () => {
             this._Router.navigate([ "/login" ])
           } , 2000)
         },
