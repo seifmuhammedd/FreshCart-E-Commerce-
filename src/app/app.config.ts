@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withViewTransitions()),
     importProvidersFrom(BrowserAnimationsModule, NgxSpinnerModule),
     provideClientHydration(),
-    provideHttpClient(withFetch(), withInterceptors([reqHeaderInterceptor, resErrorInterceptor, loadingInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([reqHeaderInterceptor])),
     provideToastr(),
   ],
 };

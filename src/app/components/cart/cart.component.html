@@ -1,49 +1,70 @@
-<section class="bg-main-light p-3 w-75 mx-auto rounded-2 shadow my-3">
+<section class="bg-main-light p-4 w-75 mx-auto rounded-3 shadow-sm my-4">
     @if (cartData) {
-        <div class="cart-head d-flex align-items-center justify-content-between">
+        <div class="cart-head d-flex align-items-center justify-content-between mb-4 p-3 bg-white rounded-3 shadow-sm">
             <div>
-                <h1 class="fs-1 fw-bold">Shop Cart:</h1>
-                <h3 class="text-main fw-bold">Total cart price: {{cartData.totalCartPrice | currency : "GBP" }}</h3>
+                <h1 class="fs-2 fw-bold mb-2">Your Shopping Cart</h1>
+                <h3 class="text-main fw-bold fs-4">
+                    <i class="fa-solid fa-receipt me-2"></i>Total: {{cartData.totalCartPrice | currency : "GBP" }}
+                </h3>
             </div>
-            <div class="clear-cart cursor-pointer text-danger" (click)="clearAllCart()">
-                <h3 class="fs-5">Empty Cart <i class="fa-solid fa-trash-can"></i></h3>
+            <div class="clear-cart cursor-pointer text-danger d-flex align-items-center" (click)="clearAllCart()">
+                <h3 class="fs-5 m-0">Empty Cart</h3>
+                <i class="fa-solid fa-trash-can ms-2"></i>
             </div>
         </div>
         <div class="container my-2">
             @for (item of cartData.products; track item.product._id) {
-            <div class="row border-bottom border-3 align-items-center">
+            <div class="row border-bottom border-2 border-light align-items-center py-3 mb-3 bg-white rounded-3 p-2 shadow-sm">
                 <div class="col-md-2 p-2">
-                    <div class="item-img">
-                        <img [src]="item.product.imageCover" [alt]="item.product.title" class="w-100 rounded-3">
+                    <div class="item-img overflow-hidden rounded-3" style="height: 120px;">
+                        <img [src]="item.product.imageCover" [alt]="item.product.title" 
+                             class="w-100 h-100 object-fit-cover">
                     </div>
                 </div>
                 <div class="col-md-8 p-2">
                     <div class="item-details">
-                        <h2 class="fs-2 fw-bold">{{item.product.title}}</h2>
-                        <p class="text-main fw-bold fs-3">Price: {{item.price | currency : "GBP"}}</p>
-                        <span class="cursor-pointer" (click)="removeCartItem(item.product._id)"><i
-                                class="fa-solid fa-trash text-main"></i> Remove</span>
+                        <h2 class="fs-5 fw-bold mb-2 text-truncate">{{item.product.title}}</h2>
+                        <p class="text-main fw-bold fs-5 mb-3">
+                            <i class="fa-solid fa-tag me-2"></i>Price: {{item.price | currency : "GBP"}}
+                        </p>
+                        <span class="cursor-pointer text-danger d-inline-flex align-items-center" 
+                              (click)="removeCartItem(item.product._id)">
+                            <i class="fa-solid fa-trash me-2"></i> Remove Item
+                        </span>
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="item-quantitiy d-flex justify-content-center align-items-center fs-2">
-                        <span (click)="updateItemQuantity(item.product._id , item.count+1)"><i
-                                class="fa-solid fa-circle-plus text-main cursor-pointer"></i></span>
-                        <span class="mx-3">{{item.count}}</span>
+                    <div class="item-quantitiy d-flex justify-content-center align-items-center fs-4 bg-main-light rounded-pill py-2">
+                        <span class="cursor-pointer px-2" 
+                              (click)="updateItemQuantity(item.product._id , item.count+1)"
+                              title="Increase quantity">
+                            <i class="fa-solid fa-plus text-main"></i>
+                        </span>
+                        <span class="mx-2 fw-bold">{{item.count}}</span>
                         @if (item.count > 1) {
-                        <span (click)="updateItemQuantity(item.product._id , item.count-1)"><i
-                                class="fa-solid fa-circle-minus text-main cursor-pointer"></i></span>
+                        <span class="cursor-pointer px-2" 
+                              (click)="updateItemQuantity(item.product._id , item.count-1)"
+                              title="Decrease quantity">
+                            <i class="fa-solid fa-minus text-main"></i>
+                        </span>
                         }
                     </div>
                 </div>
             </div>
             }
             @empty {
-                <h1 class="text-danger text-center fw-bold">No Products Added Yet</h1>
+                <div class="text-center p-5 bg-white rounded-3 shadow-sm">
+                    <i class="fa-solid fa-cart-shopping fs-1 text-muted mb-3"></i>
+                    <h1 class="text-danger fw-bold">Your Cart is Empty</h1>
+                    <p class="text-muted">Start shopping to add items to your cart</p>
+                </div>
             }
         </div>
         @if(cartData.products.length){
-        <button class="btn-main mx-auto w-50 d-block my-3 " [routerLink]="['/checkout', cartData._id]">Check Out</button>  
+        <button class="btn-main mx-auto w-50 d-block my-3 py-3 rounded-pill fw-bold fs-5" 
+                [routerLink]="['/checkout', cartData._id]">
+            <i class="fa-solid fa-credit-card me-2"></i>Proceed to Checkout
+        </button>  
         }
     }
 </section>

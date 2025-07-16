@@ -20,7 +20,7 @@ export class LoginComponent implements OnDestroy {
 
   logInForm : FormGroup = this._FormBuilder.group({
     email : [null , [Validators.required , Validators.email]],
-    password : [null , [Validators.required , Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)]]
+    password : [null , [Validators.required , Validators.pattern(/^\w{6,}$/)]]
   })
   
     logInData():void{

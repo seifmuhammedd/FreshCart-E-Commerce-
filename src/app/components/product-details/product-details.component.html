@@ -12,9 +12,9 @@
             </div>
             <div class="col-12 col-md-9 p-2">
                 <div class="details">
-                    <p class="fw-bold my-2">{{productDetails?.description}}</p>
-                    <h2 class="fs-2 fw-bold my-2">{{productDetails?.title}}</h2>
-                    <h2 class="fs-3 text-main my-2">{{productDetails.category?.name}}</h2>
+                    <p class="fw-bold my-2">{{productDetails.description}}</p>
+                    <h2 class="fs-2 fw-bold my-2">{{productDetails.title}}</h2>
+                    <h2 class="fs-3 text-main my-2">{{productDetails.category.name}}</h2>
                     <div class="d-flex justify-content-between align-items-center my-2">
                         <span>{{productDetails.price |currency : 'GBP' }}</span>
                         <div class="small">
