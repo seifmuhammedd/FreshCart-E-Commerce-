@@ -1,0 +1,118 @@
+.category-card {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    background: #fff;
+}
+
+.category-img-container {
+    position: relative;
+    padding-top: 100%; /* 1:1 aspect ratio */
+    overflow: hidden;
+}
+
+.category-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.category-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 30%, transparent);
+    padding: 1.5rem;
+    color: white;
+    transform: translateY(0);
+    transition: all 0.4s ease;
+}
+
+.category-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem !important;
+    transition: all 0.3s ease;
+}
+
+.category-hover-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    height: 0;
+    overflow: hidden;
+}
+
+.category-products-count {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.btn-shop-now {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover Effects */
+.category-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.category-card:hover .category-img {
+    transform: scale(1.08);
+    filter: brightness(1.05);
+}
+
+.category-card:hover .category-overlay {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 20%, transparent);
+}
+
+.category-card:hover .category-title {
+    transform: translateY(-10px);
+}
+
+.category-card:hover .category-hover-content {
+    opacity: 1;
+    transform: translateY(0);
+    height: auto;
+}
+
+.btn-shop-now:hover {
+    background: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .category-card {
+        border-radius: 12px;
+    }
+    
+    .category-overlay {
+        padding: 1rem;
+    }
+    
+    .category-title {
+        font-size: 1.1rem;
+    }
+    
+    .btn-shop-now {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+}
